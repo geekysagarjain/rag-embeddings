@@ -11,3 +11,12 @@ Ideal for anyone exploring how to combine semantic search with LLMs in real-worl
 
 <img width="1777" height="670" alt="image" src="https://github.com/user-attachments/assets/1346d72f-861e-4643-8813-3678722a2906" />
 
+| Step | Task                  | Tools                                       |
+| ---- | --------------------- | ------------------------------------------- |
+| 1    | Load documents        | `PyPDFLoader`, `TextLoader`, etc.           |
+| 2    | Split text            | `RecursiveCharacterTextSplitter`            |
+| 3    | Embed text            | `OpenAIEmbeddings`, `HuggingFaceEmbeddings` |
+| 4    | Store vectors         | `FAISS`, `Chroma`, `Pinecone`, etc.         |
+| 5    | Save store (optional) | `save_local()`, cloud save                  |
+
+
