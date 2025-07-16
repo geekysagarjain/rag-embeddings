@@ -19,21 +19,19 @@ if __name__ == "__main__":
     embeddings = OpenAIEmbeddings()
     llm = ChatOpenAI()
 
-    query = "what is Pinecone in machine learning?"
-    chain = PromptTemplate.from_template(template=query) | llm
-    # result = chain.invoke(input={})
-    # print(result.content)
+    query = "what is Pinecone in machine learning?" #defining the question to retrive data from db
+    # chain = PromptTemplate.from_template(template=query) | llm #created a simple prompt and paased out wuestion
 
     vectorstore = PineconeVectorStore(
-        index_name=os.environ["INDEX_NAME"], embedding=embeddings
+        index_name=os.environ["INDEX_NAME"], embedding=embeddings #getting the data from pinecone db which we save through ingetion.py
     )
 
-    retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat")
-    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
+    retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat") #using the opensource prompt 
+    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt) #chaining together the openAI llm and prompt
     retrival_chain = create_retrieval_chain(
-        retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain
+        retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain #retriving data from vectorstore
     )
 
-    result = retrival_chain.invoke(input={"input": query})
+    result = retrival_chain.invoke(input={"input": query}) #passing the question and invoking the same
 
     print(result['answer'])
