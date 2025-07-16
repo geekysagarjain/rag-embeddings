@@ -27,7 +27,7 @@ if __name__ == "__main__":
     )
 
     retrieval_qa_chat_prompt = hub.pull("langchain-ai/retrieval-qa-chat") #using the opensource prompt 
-    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt) #chaining together the openAI llm and prompt
+    combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt) #stuffing together the openAI llm and prompt
     retrival_chain = create_retrieval_chain(
         retriever=vectorstore.as_retriever(), combine_docs_chain=combine_docs_chain #retriving data from vectorstore
     )
